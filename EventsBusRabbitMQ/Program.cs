@@ -16,10 +16,11 @@ builder.Services.AddSwaggerGen();
 // 注入事件处理服务
 builder.Services.AddSingleton(typeof(IEventsBusHandle<CreateOrderEto>), typeof(CreateOrderEventsBusHandle));
 
+//配置
 builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection(nameof(RabbitMQOptions)));
 
 // 注入RabbitMQ服务
-builder.Services.AddEventsBusRabbitMQ(builder.Configuration);
+builder.Services.AddEventsBusRabbitMQ();
 
 var app = builder.Build();
 

@@ -12,8 +12,9 @@ namespace EventsBus.RabbitMQ
 {
     public static class EventsBusRabbitMQExtensions
     {
-        public static IServiceCollection AddEventsBusRabbitMQ(this IServiceCollection services,
-             IConfiguration configuration)
+        public static IServiceCollection AddEventsBusRabbitMQ(this IServiceCollection services
+             //,IConfiguration configuration
+             )
         {
             services.AddSingleton<RabbitMQFactory>();
             services.AddSingleton(typeof(RabbitMQEventsManage<>));
