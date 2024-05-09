@@ -1,6 +1,5 @@
 ﻿using EventsBus.Contract;
 using EventsBusRabbitMQ.Api.Handle.Eto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventsBusRabbitMQ.Api.Controllers
@@ -16,6 +15,11 @@ namespace EventsBusRabbitMQ.Api.Controllers
             _loadEventBus = loadEventBus;
         }
 
+        /// <summary>
+        /// 测试创建订单
+        /// </summary>
+        /// <param name="eto"></param>
+        /// <returns></returns>
         [HttpPost("order-created")]
         public async Task SendOrderCreated(CreateOrderEto eto)
         {

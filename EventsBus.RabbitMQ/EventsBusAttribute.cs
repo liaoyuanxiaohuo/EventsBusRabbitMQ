@@ -1,19 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EventsBus.RabbitMQ
+﻿namespace EventsBus.RabbitMQ
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class EventsBusAttribute : Attribute
     {
-        public readonly string Name;
+        /// <summary>
+        /// 交换机名称
+        /// </summary>
+        public readonly string ExchangeName;
 
-        public EventsBusAttribute(string name)
+        /// <summary>
+        /// routingKey
+        /// </summary>
+        public readonly string RoutingKey;
+
+        /// <summary>
+        /// 队列名称
+        /// </summary>
+        public readonly string QueueName;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exchangeName">交换机名称</param>
+        /// <param name="routingKey">routingKey</param>
+        /// <param name="queueName">队列名称</param>
+        public EventsBusAttribute(string exchangeName, string routingKey, string queueName)
         {
-            Name = name;
+            ExchangeName = exchangeName;
+            RoutingKey = routingKey;
+            QueueName = queueName;
         }
     }
 }

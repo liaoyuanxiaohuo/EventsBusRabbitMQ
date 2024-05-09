@@ -2,17 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace EventsBus.RabbitMQ
 {
-    public class RabbitMQEventsManage<TEto> where TEto : class
+    public class RabbitMQEventsManage<TEto> where TEto : IEvent
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly RabbitMQFactory _rabbitMQFactory;
@@ -28,11 +23,13 @@ namespace EventsBus.RabbitMQ
         {
             var channel = _rabbitMQFactory.CreateRabbitMQ();
             var eventBus = typeof(TEto).GetCustomAttribute<EventsBusAttribute>();
-            var name = eventBus?.Name ?? typeof(TEto).Name;
-            channel.QueueDeclare(name, true, false, false, null);
+
+            var queueName = eventBus?.QueueName ?? typeof(TEto).Name;
+            channel.QueueDeclare(queueName, true, false, false, null);
             var consumer = new EventingBasicConsumer(channel);
-            channel.BasicConsume(name, false, consumer);
-            //channel.BasicConsume(name, true, consumer); //消费消息
+            channel.BasicConsume(queueName, false, consumer);
+
+            //消费消息
             consumer.Received += async (model, ea) =>
             {
                 var bytes = ea.Body.ToArray();

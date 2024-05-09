@@ -2,7 +2,6 @@ using EventsBus.Contract;
 using EventsBus.RabbitMQ;
 using EventsBusRabbitMQ.Api.Handle;
 using EventsBusRabbitMQ.Api.Handle.Eto;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +15,7 @@ builder.Services.AddSwaggerGen();
 // 注入事件处理服务
 builder.Services.AddSingleton(typeof(IEventsBusHandle<CreateOrderEto>), typeof(CreateOrderEventsBusHandle));
 
-//配置
+//rabbitmq配置
 builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection(nameof(RabbitMQOptions)));
 
 // 注入RabbitMQ服务

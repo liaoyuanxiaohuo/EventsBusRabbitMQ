@@ -14,6 +14,6 @@ namespace EventsBus.Contract
         /// <typeparam name="TEto"></typeparam>
         /// <param name="eto"></param>
         /// <returns></returns>
-        Task PushAsync<TEto>(TEto eto) where TEto : class;
+        Task PushAsync<TEto>(TEto eto) where TEto : IEvent;
     }
 }

@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EventsBus.RabbitMQ
 {
@@ -13,7 +8,6 @@ namespace EventsBus.RabbitMQ
         private readonly RabbitMQOptions _options;
         private readonly ConnectionFactory _connectionFactory;
         private IConnection? _connection;
-
 
         public RabbitMQFactory(IOptions<RabbitMQOptions> options)
         {
