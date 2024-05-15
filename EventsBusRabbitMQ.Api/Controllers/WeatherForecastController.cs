@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace EventsBusRabbitMQ.Api.Controllers
+namespace EventBusRabbitMQ.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

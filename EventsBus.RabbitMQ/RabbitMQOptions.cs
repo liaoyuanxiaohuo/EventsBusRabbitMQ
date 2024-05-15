@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventsBus.RabbitMQ
+namespace EventBus.RabbitMQ
 {
     /// <summary>
     /// 连接属性

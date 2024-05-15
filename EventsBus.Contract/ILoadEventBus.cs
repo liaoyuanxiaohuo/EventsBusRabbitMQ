@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventsBus.Contract
+namespace EventBus.Contract
 {
     public interface ILoadEventBus
     {

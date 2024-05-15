@@ -1,12 +1,12 @@
-﻿using EventsBus.Contract;
-using EventsBus.RabbitMQ;
+﻿using EventBus.Contract;
+using EventBus.RabbitMQ;
 
-namespace EventsBusRabbitMQ.Api.Handle.Eto
+namespace EventBusRabbitMQ.Api.Handle.Eto
 {
     /// <summary>
     /// 
     /// </summary>
-    [EventsBus("OrderExchange", "create.order", "CreateOrder")]
+    [EventBus("OrderExchange", "create.order", "CreateOrder")]
     public class CreateOrderEto : IEvent
     {
         /// <summary>

@@ -1,7 +1,4 @@
-using EventsBus.Contract;
-using EventsBus.RabbitMQ;
-using EventsBusRabbitMQ.Api.Handle;
-using EventsBusRabbitMQ.Api.Handle.Eto;
+using EventBus.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,13 +10,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // 注入事件处理服务
-builder.Services.AddSingleton(typeof(IEventsBusHandle<CreateOrderEto>), typeof(CreateOrderEventsBusHandle));
+//builder.Services.AddSingleton(typeof(IEventBusHandle<CreateOrderEto>), typeof(CreateOrderEventBusHandle));
+//builder.Services.AddSingleton(typeof(IEventBusHandle<CreateOrder1Eto>), typeof(CreateOrder1EventBusHandle));
 
 //rabbitmq配置
 builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection(nameof(RabbitMQOptions)));
 
 // 注入RabbitMQ服务
-builder.Services.AddEventsBusRabbitMQ();
+builder.Services.AddEventBusRabbitMQ();
 
 var app = builder.Build();
 

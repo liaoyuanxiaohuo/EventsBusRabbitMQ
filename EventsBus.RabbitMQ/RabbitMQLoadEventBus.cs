@@ -1,17 +1,17 @@
-﻿using EventsBus.Contract;
+﻿using EventBus.Contract;
 using System.Reflection;
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 
-namespace EventsBus.RabbitMQ
+namespace EventBus.RabbitMQ
 {
     public class RabbitMQLoadEventBus : ILoadEventBus
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly RabbitMQFactory _rabbitMQFactory;
 
-        public RabbitMQLoadEventBus(IServiceProvider serviceProvider, 
+        public RabbitMQLoadEventBus(IServiceProvider serviceProvider,
             RabbitMQFactory rabbitMQFactory)
         {
             _serviceProvider = serviceProvider;
@@ -29,27 +29,28 @@ namespace EventsBus.RabbitMQ
         {
             using var channel = _rabbitMQFactory.CreateRabbitMQ();
 
-            // 获取Eto中的EventsBusAttribute特性，获取名称，如果没有默认使用类名称
-            var eventBus = typeof(TEto).GetCustomAttribute<EventsBusAttribute>();
+            // 获取Eto中的EventBusAttribute特性，获取名称，如果没有默认使用类名称
+            var eventBus = typeof(TEto).GetCustomAttribute<EventBusAttribute>();
 
             var exchangeName = eventBus?.ExchangeName ?? typeof(TEto).Name;
             var routingKey = eventBus?.RoutingKey ?? typeof(TEto).Name;
-            var queueName = eventBus?.QueueName ?? typeof(TEto).Name;
+
+            //var queueName = eventBus?.QueueName ?? typeof(TEto).Name;
 
             // 创建topic类型的交换机
             channel.ExchangeDeclare(exchangeName, ExchangeType.Topic);
 
             // 创建队列
-            channel.QueueDeclare(queueName, true, false, false, null);
+            //channel.QueueDeclare(queueName, true, false, false, null);
 
             // 通过routingkey将队列绑定到交换机
-            channel.QueueBind(queueName, exchangeName, routingKey);
+            //channel.QueueBind(queueName, exchangeName, routingKey);
 
             // 持久化消息
             var propeties = channel.CreateBasicProperties();
             propeties.DeliveryMode = 2;
 
-            // 发送消息
+            // 发送消息到exchange
             channel.BasicPublish(exchangeName, routingKey, false, propeties, JsonSerializer.SerializeToUtf8Bytes(eto));
 
             var eventsManage = _serviceProvider.GetService<RabbitMQEventsManage<TEto>>();

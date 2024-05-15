@@ -1,7 +1,7 @@
-﻿namespace EventsBus.RabbitMQ
+﻿namespace EventBus.RabbitMQ
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class EventsBusAttribute : Attribute
+    public class EventBusAttribute : Attribute
     {
         /// <summary>
         /// 交换机名称
@@ -24,7 +24,7 @@
         /// <param name="exchangeName">交换机名称</param>
         /// <param name="routingKey">routingKey</param>
         /// <param name="queueName">队列名称</param>
-        public EventsBusAttribute(string exchangeName, string routingKey, string queueName)
+        public EventBusAttribute(string exchangeName, string routingKey, string queueName)
         {
             ExchangeName = exchangeName;
             RoutingKey = routingKey;

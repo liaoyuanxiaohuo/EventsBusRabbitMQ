@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EventsBus.Contract
+﻿namespace EventBus.Contract
 {
-    public interface IEventsBusHandle<in TEto> where TEto : IEvent
+    public interface IEventBusHandle<in TEto> where TEto : IEvent
     {
         /// <summary>
         /// 接收处理逻辑

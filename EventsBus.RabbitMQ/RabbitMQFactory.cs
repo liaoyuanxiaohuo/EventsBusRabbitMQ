@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
-namespace EventsBus.RabbitMQ
+namespace EventBus.RabbitMQ
 {
     public class RabbitMQFactory : IDisposable
     {
@@ -15,7 +15,7 @@ namespace EventsBus.RabbitMQ
 
             _connectionFactory = new ConnectionFactory
             {
-                HostName = _options.HostName, 
+                HostName = _options.HostName,
                 Port = _options.Port,
                 UserName = _options.UserName,
                 Password = _options.Password,

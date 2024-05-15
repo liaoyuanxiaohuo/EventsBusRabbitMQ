@@ -1,4 +1,4 @@
-namespace EventsBusRabbitMQ.Api
+namespace EventBusRabbitMQ.Api
 {
     public class WeatherForecast
     {
