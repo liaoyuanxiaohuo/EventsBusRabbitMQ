@@ -7,8 +7,12 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class EventBusRabbitMQExtensions
     {
-        public static IServiceCollection AddEventBusRabbitMQ(this IServiceCollection services)
+        public static IServiceCollection AddEventBusRabbitMQ(this IServiceCollection services, Action<RabbitMQOptions> setupAction)
         {
+            var options = new RabbitMQOptions();
+            setupAction(options);
+            services.Configure(setupAction);
+
             services.AddSingleton<RabbitMQFactory>();
             services.AddSingleton(typeof(RabbitMQEventsManage<>));
             services.AddSingleton<ILoadEventBus, RabbitMQLoadEventBus>();
@@ -22,5 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return services;
         }
+
+
     }
 }
