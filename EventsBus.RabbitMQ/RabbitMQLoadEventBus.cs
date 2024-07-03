@@ -50,7 +50,7 @@ namespace EventBus.RabbitMQ
             var propeties = channel.CreateBasicProperties();
             propeties.DeliveryMode = 2;
 
-            // 发送消息到exchange
+            // 发送消息到exchange、routingkey
             channel.BasicPublish(exchangeName, routingKey, false, propeties, JsonSerializer.SerializeToUtf8Bytes(eto));
 
             var eventsManage = _serviceProvider.GetService<RabbitMQEventsManage<TEto>>();
